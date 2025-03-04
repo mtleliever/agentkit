@@ -9,6 +9,7 @@ export * from "./cdp";
 export * from "./compound";
 export * from "./erc20";
 export * from "./erc721";
+export * from "./magiceden";
 export * from "./farcaster";
 export * from "./jupiter";
 export * from "./pyth";
