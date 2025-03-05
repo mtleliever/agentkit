@@ -5,7 +5,7 @@ import { z } from "zod";
 import { ActionProvider } from "../actionProvider";
 import { EvmWalletProvider } from "../../wallet-providers";
 import { CreateAction } from "../actionDecorator";
-import { BidSchema, BuySchema, ListSchema, SellSchema } from "./schemas";
+import { EvmBidSchema, EvmBuySchema, EvmListSchema, EvmSellSchema } from "./schemas";
 import { Network } from "../../network";
 import { ME_EVM_BASE_URL } from "./constants";
 import { submitTransaction, getWethAddress, toMagicEdenChain } from "./utils";
@@ -14,7 +14,7 @@ import { mainnet, base, arbitrum, polygon } from "viem/chains";
 /**
  * MagicEdenActionProvider provides functionality to interact with Magic Eden's marketplace.
  */
-export class MagicEdenActionProvider extends ActionProvider {
+export class MagicEdenEvmActionProvider extends ActionProvider {
   /**
    * Constructor for the MagicEdenActionProvider class.
    */
@@ -49,11 +49,11 @@ This tool places a bid (NFT offer) on an NFT (ERC721) on Magic Eden.
   **Note:** Tokens HAVE to be in the format 'collectionAddress:tokenId'. If you just get the collectionAddress, then assume it is not
   a token.
     `,
-    schema: BidSchema,
+    schema: EvmBidSchema,
   })
   public async bidMagicEden(
     walletProvider: EvmWalletProvider,
-    args: z.infer<typeof BidSchema>,
+    args: z.infer<typeof EvmBidSchema>,
   ): Promise<string> {
     const address = walletProvider.getAddress();
     const chainId = walletProvider.getNetwork().chainId!;
@@ -123,11 +123,11 @@ This tool places a bid (NFT offer) on an NFT (ERC721) on Magic Eden.
    Tokens HAVE to be in the format 'collectionAddress:tokenId'. Collections do not contain the semi colon. 
    If a token is provided, the purchase is for that specific NFT.
     `,
-    schema: BuySchema,
+    schema: EvmBuySchema,
   })
   public async buyMagicEden(
     walletProvider: EvmWalletProvider,
-    args: z.infer<typeof BuySchema>,
+    args: z.infer<typeof EvmBuySchema>,
   ): Promise<string> {
     console.log("args ", args);
     const address = walletProvider.getAddress();
@@ -182,11 +182,11 @@ This tool places a bid (NFT offer) on an NFT (ERC721) on Magic Eden.
   - (optional) expirationTime: "1738894926"
   - apiKey: "<your API key>"
     `,
-    schema: ListSchema,
+    schema: EvmListSchema,
   })
   public async listMagicEden(
     walletProvider: EvmWalletProvider,
-    args: z.infer<typeof ListSchema>,
+    args: z.infer<typeof EvmListSchema>,
   ): Promise<string> {
     const address = walletProvider.getAddress();
     const chainId = walletProvider.getNetwork().chainId!;
@@ -238,11 +238,11 @@ This tool places a bid (NFT offer) on an NFT (ERC721) on Magic Eden.
     
     No additional details (such as price or quantity) are required.
         `,
-    schema: SellSchema,
+    schema: EvmSellSchema,
   })
   public async sellMagicEden(
     walletProvider: EvmWalletProvider,
-    args: z.infer<typeof SellSchema>,
+    args: z.infer<typeof EvmSellSchema>,
   ): Promise<string> {
     const address = walletProvider.getAddress();
     const chainId = walletProvider.getNetwork().chainId!;
@@ -451,4 +451,4 @@ This tool places a bid (NFT offer) on an NFT (ERC721) on Magic Eden.
   }
 }
 
-export const magicEdenActionProvider = (): MagicEdenActionProvider => new MagicEdenActionProvider();
+export const magicEdenActionProvider = (): MagicEdenEvmActionProvider => new MagicEdenEvmActionProvider();

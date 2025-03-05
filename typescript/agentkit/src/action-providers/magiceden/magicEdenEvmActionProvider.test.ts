@@ -1,4 +1,4 @@
-import { MagicEdenActionProvider } from "./magicEdenActionProvider";
+import { MagicEdenEvmActionProvider } from "./magicEdenEvmActionProvider";
 import { EvmWalletProvider } from "../../wallet-providers";
 import { ME_EVM_BASE_URL } from "./constants";
 import { toMagicEdenChain } from "./utils";
@@ -11,12 +11,12 @@ const MOCK_NETWORK = {
   protocolFamily: "evm",
 };
 
-describe("MagicEdenActionProvider", () => {
-  let actionProvider: MagicEdenActionProvider;
+describe("MagicEdenEvmActionProvider", () => {
+  let actionProvider: MagicEdenEvmActionProvider;
   let mockWallet: jest.Mocked<EvmWalletProvider>;
 
   beforeEach(() => {
-    actionProvider = new MagicEdenActionProvider();
+    actionProvider = new MagicEdenEvmActionProvider();
 
     mockWallet = {
       getAddress: jest.fn().mockReturnValue(MOCK_ADDRESS),

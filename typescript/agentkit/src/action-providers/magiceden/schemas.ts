@@ -3,7 +3,7 @@ import { z } from "zod";
 /**
  * Input schema for bidding on an NFT (ERC721) or collection on Magic Eden.
  */
-export const BidSchema = z
+export const EvmBidSchema = z
   .object({
     weiPrice: z.string().min(1, "Bid amount in wei is required").describe("Bid amount in wei"),
     expirationTime: z
@@ -21,7 +21,7 @@ export const BidSchema = z
  * Input schema for buying an NFT (ERC721) on Magic Eden.
  * Users can either buy a specific NFT token or any number of tokens off the floor.
  */
-export const BuySchema = z
+export const EvmBuySchema = z
   .object({
     token: z.string().optional().describe("The NFT ID in the format 'collectionAddress:tokenId'"),
     collection: z.string().optional().describe("The collection address"),
@@ -34,7 +34,7 @@ export const BuySchema = z
 /**
  * Input schema for listing an NFT (ERC721) on Magic Eden.
  */
-export const ListSchema = z
+export const EvmListSchema = z
   .object({
     token: z
       .string()
@@ -53,7 +53,7 @@ export const ListSchema = z
 /**
  * Input schema for accepting an offer (selling) an NFT on Magic Eden.
  */
-export const SellSchema = z
+export const EvmSellSchema = z
   .object({
     token: z
       .string()

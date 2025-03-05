@@ -1,1 +1,1 @@
-export * from "./magicEdenActionProvider";
+export * from "./magicEdenEvmActionProvider";
