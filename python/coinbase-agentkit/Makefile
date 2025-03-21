@@ -1,3 +1,9 @@
+ifneq (,$(wildcard ./.env))
+	include .env
+endif
+
+export
+
 .PHONY: install
 install:
 	poetry install
@@ -5,6 +11,10 @@ install:
 .PHONY: format
 format:
 	poetry run ruff format .
+
+.PHONY: format-check
+format-check:
+	poetry run ruff format . --check
 
 .PHONY: lint
 lint:
@@ -24,7 +34,19 @@ local-docs: docs
 
 .PHONY: test
 test:
-	poetry run pytest
+	poetry run pytest -m "not (e2e or integration)"
+
+.PHONY: test-e2e
+test-e2e:
+	poetry run pytest -m e2e
+
+.PHONY: test-integration
+test-integration:
+	poetry run pytest -m integration
+
+.PHONY: check-description-length
+check-description-length:
+	poetry run check-description-length
 
 .PHONY: generate-action-provider
 generate-action-provider:

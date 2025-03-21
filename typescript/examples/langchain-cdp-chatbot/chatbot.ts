@@ -4,10 +4,13 @@ import {
   wethActionProvider,
   walletActionProvider,
   erc20ActionProvider,
+  erc721ActionProvider,
   cdpApiActionProvider,
   cdpWalletActionProvider,
   pythActionProvider,
   magicEdenActionProvider,
+  openseaActionProvider,
+  alloraActionProvider,
 } from "@coinbase/agentkit";
 import { getLangChainTools } from "@coinbase/agentkit-langchain";
 import { HumanMessage } from "@langchain/core/messages";
@@ -101,6 +104,7 @@ async function initializeAgent() {
         walletActionProvider(),
         erc20ActionProvider(),
         magicEdenActionProvider(),
+        erc721ActionProvider(),
         cdpApiActionProvider({
           apiKeyName: process.env.CDP_API_KEY_NAME,
           apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY,
@@ -109,6 +113,17 @@ async function initializeAgent() {
           apiKeyName: process.env.CDP_API_KEY_NAME,
           apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY,
         }),
+        // Only add OpenSea provider if API key is configured
+        ...(process.env.OPENSEA_API_KEY
+          ? [
+              openseaActionProvider({
+                apiKey: process.env.OPENSEA_API_KEY,
+                networkId: walletProvider.getNetwork().networkId,
+                privateKey: await (await walletProvider.getWallet().getDefaultAddress()).export(),
+              }),
+            ]
+          : []),
+        alloraActionProvider(),
       ],
     });
 

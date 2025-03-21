@@ -192,6 +192,23 @@ const agent = createReactAgent({
 </table>
 </details>
 <details>
+<summary><strong>DefiLlama</strong></summary>
+<table width="100%">
+<tr>
+    <td width="200"><code>find_protocol</code></td>
+    <td width="768">Searches for DeFi protocols on DefiLlama by name, returning protocol metadata including TVL, chain, and category.</td>
+</tr>
+<tr>
+    <td width="200"><code>get_protocol</code></td>
+    <td width="768">Fetches detailed information about a specific protocol from DefiLlama, including TVL, description, and historical data.</td>
+</tr>
+<tr>
+    <td width="200"><code>get_token_prices</code></td>
+    <td width="768">Fetches current token prices from DefiLlama for specified token addresses with chain prefixes.</td>
+</tr>
+</table>
+</details>
+<details>
 <summary><strong>ERC20</strong></summary>
 <table width="100%">
 <tr>
@@ -244,6 +261,19 @@ const agent = createReactAgent({
 <tr>
     <td width="200"><code>withdraw</code></td>
     <td width="768">Withdraws a specified amount of assets from a designated Morpho Vault.</td>
+</tr>
+</table>
+</details>
+<details>
+<summary><strong>Opensea</strong></summary>
+<table width="100%">
+<tr>
+    <td width="200"><code>list_nft</code></td>
+    <td width="768">Lists an NFT for sale on OpenSea.</td>
+</tr>
+<tr>
+    <td width="200"><code>get_nfts_by_account</code></td>
+    <td width="768">Fetches NFTs owned by a specific wallet address on OpenSea.</td>
 </tr>
 </table>
 </details>
